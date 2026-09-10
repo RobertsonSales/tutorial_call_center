@@ -227,6 +227,1313 @@
   .demo-note{display:flex;gap:8px;align-items:flex-start;background:var(--info-light);color:var(--info);border-radius:8px;padding:10px 13px;font-size:12.3px;line-height:1.55;margin-bottom:20px;}
   .demo-player{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px 26px 20px;}
   .demo-stage{display:flex;gap:26px;align-items:flex-start;min-height:340px;}
+  @media (max-width:740px){.demo-stage{flex-direction:column;align-items:center;}}
+
+  /* telefone (lado cliente) */
+  .demo-phone{width:178px;flex:0 0 178px;background:var(--sidebar-bg);border-radius:22px;padding:6px;box-shadow:0 10px 30px -12px rgba(0,0,0,.35);}
+  .demo-phone-screen{background:var(--bg);border-radius:16px;overflow:hidden;height:320px;display:flex;flex-direction:column;}
+  .demo-phone-header{background:var(--whatsapp);color:#fff;padding:8px 10px;display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;flex:0 0 auto;}
+  .demo-phone-header .av{width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;font-size:10px;}
+  .demo-phone-chat{flex:1;padding:10px 8px;display:flex;flex-direction:column;gap:6px;overflow:hidden;}
+  .demo-bubble{max-width:92%;padding:7px 9px;border-radius:10px;font-size:11px;line-height:1.4;opacity:0;transform:translateY(8px) scale(.97);transition:opacity .4s ease, transform .4s ease;}
+  .demo-bubble.in{background:var(--surface);color:var(--text);align-self:flex-start;border-bottom-left-radius:3px;box-shadow:0 1px 2px rgba(0,0,0,.08);}
+  .demo-bubble.out{background:var(--primary);color:#fff;align-self:flex-end;border-bottom-right-radius:3px;}
+  .demo-bubble.show{opacity:1;transform:translateY(0) scale(1);}
+  .demo-typing{align-self:flex-start;display:flex;gap:3px;padding:7px 9px;background:var(--surface);border-radius:10px;border-bottom-left-radius:3px;opacity:0;transition:opacity .3s ease;}
+  .demo-typing.show{opacity:1;}
+  .demo-typing i{width:5px;height:5px;border-radius:50%;background:var(--text-muted);animation:demoBlink 1s infinite ease-in-out;}
+  .demo-typing i:nth-child(2){animation-delay:.15s;}
+  .demo-typing i:nth-child(3){animation-delay:.3s;}
+  @keyframes demoBlink{0%,80%,100%{opacity:.25;}40%{opacity:1;}}
+
+  /* seta central com o protocolo */
+  .demo-ticket-col{flex:0 0 78px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding-top:60px;}
+  @media (max-width:740px){.demo-ticket-col{flex:0 0 auto;flex-direction:row;padding-top:0;}}
+  .demo-ticket-chip{opacity:0;transform:scale(.7);transition:opacity .4s ease, transform .4s ease;background:var(--primary);color:#fff;font-family:'JetBrains Mono';font-size:10px;font-weight:700;padding:6px 8px;border-radius:7px;text-align:center;white-space:nowrap;box-shadow:0 6px 18px -6px rgba(15,110,99,.55);}
+  .demo-ticket-chip.show{opacity:1;transform:scale(1);}
+  .demo-ticket-arrow{color:var(--text-muted);font-size:16px;opacity:.5;}
+
+  /* janela do app (lado técnico) */
+  .demo-app{flex:1;min-width:0;background:var(--bg);border-radius:12px;border:1px solid var(--border);overflow:hidden;}
+  .demo-app-bar{background:var(--sidebar-bg-2);color:#fff;padding:8px 12px;font-size:11px;font-weight:700;display:flex;align-items:center;gap:8px;}
+  .demo-app-bar .dot{width:7px;height:7px;border-radius:50%;background:var(--whatsapp);}
+  .demo-app-body{padding:12px;min-height:280px;position:relative;}
+  .demo-app-group-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--text-muted);margin-bottom:6px;display:flex;align-items:center;gap:6px;}
+  .demo-app-group{margin-bottom:12px;opacity:.35;transition:opacity .3s ease;}
+  .demo-app-group.active{opacity:1;}
+  .demo-card{background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:8px 10px;display:flex;align-items:center;gap:8px;opacity:0;transform:translateY(6px);transition:opacity .4s ease, transform .4s ease, border-color .3s ease;}
+  .demo-card.show{opacity:1;transform:translateY(0);}
+  .demo-card .ic{width:28px;height:28px;border-radius:7px;background:var(--primary-light);color:var(--primary-dark);display:flex;align-items:center;justify-content:center;font-size:13px;flex:0 0 28px;}
+  .demo-card .info{flex:1;min-width:0;}
+  .demo-card .info strong{display:block;font-size:11.8px;}
+  .demo-card .info span{display:block;font-size:10.5px;color:var(--text-muted);}
+  .demo-card .badge-demo{font-size:9.5px;font-weight:700;padding:3px 7px;border-radius:20px;white-space:nowrap;}
+  .badge-demo.aguardando{background:var(--warning-light);color:var(--warning);}
+  .badge-demo.andamento{background:var(--supervisor-light);color:var(--supervisor);}
+  .demo-card .btn-assumir{font-size:10px;font-weight:700;padding:4px 9px;border-radius:6px;background:var(--primary);color:#fff;border:none;white-space:nowrap;position:relative;}
+  .demo-cursor{position:absolute;font-size:18px;opacity:0;transition:opacity .3s ease, left .55s cubic-bezier(.4,0,.2,1), top .55s cubic-bezier(.4,0,.2,1);pointer-events:none;filter:drop-shadow(0 3px 4px rgba(0,0,0,.3));}
+  .demo-cursor.show{opacity:1;}
+  .demo-click-ring{position:absolute;width:24px;height:24px;border-radius:50%;border:2px solid var(--primary);opacity:0;pointer-events:none;}
+  .demo-click-ring.ping{animation:demoPing .5s ease-out;}
+  @keyframes demoPing{0%{opacity:.9;transform:scale(.4);}100%{opacity:0;transform:scale(1.8);}}
+
+  .demo-detail{position:absolute;inset:6px;background:var(--surface);border-radius:9px;border:1px solid var(--border);opacity:0;transform:translateY(10px);transition:opacity .35s ease, transform .35s ease;pointer-events:none;display:flex;flex-direction:column;}
+  .demo-detail.show{opacity:1;transform:translateY(0);}
+  .demo-detail-head{padding:8px 12px;border-bottom:1px solid var(--border);font-size:11px;font-weight:700;display:flex;justify-content:space-between;align-items:center;}
+  .demo-detail-head .proto{font-family:'JetBrains Mono';color:var(--primary-dark);}
+  .demo-detail-chat{flex:1;padding:10px 12px;display:flex;flex-direction:column;gap:6px;}
+
+  .demo-caption{margin-top:14px;min-height:36px;display:flex;align-items:center;gap:8px;}
+  .demo-caption .step-ic{width:28px;height:28px;border-radius:8px;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Sora';font-weight:700;font-size:12.5px;flex:0 0 28px;}
+  .demo-caption p{font-size:13px;font-weight:600;color:var(--text);}
+  .demo-caption span{display:block;font-size:11.5px;font-weight:400;color:var(--text-muted);margin-top:1px;}
+
+  .demo-controls{display:flex;align-items:center;gap:8px;margin-top:14px;padding-top:12px;border-top:1px solid var(--border);}
+  .demo-btn{width:32px;height:32px;border-radius:50%;border:1px solid var(--border);background:var(--surface);color:var(--text);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12.5px;}
+  .demo-btn:hover{border-color:var(--primary);color:var(--primary-dark);}
+  .demo-btn.demo-play{width:38px;height:38px;background:var(--primary);color:#fff;border:none;font-size:13.5px;}
+  .demo-dots{display:flex;gap:6px;flex:1;justify-content:center;}
+  .demo-dot{width:7px;height:7px;border-radius:50%;background:var(--border);cursor:pointer;transition:background .2s,transform .2s;}
+  .demo-dot.active{background:var(--primary);transform:scale(1.3);}
+  .demo-btn.narrando{background:var(--primary);color:#fff;border-color:transparent;}
+  .demo-btn.narrando:hover{color:#fff;}
+  .demo-btn.sem-voz{opacity:.5;cursor:not-allowed;}
+  .demo-controls-sep{width:1px;height:22px;background:var(--border);margin:0 2px;}
+
+  /* ---------- faq ---------- */
+  .faq-item{border-bottom:1px solid var(--border);padding:16px 0;}
+  .faq-q{display:flex;justify-content:space-between;gap:14px;cursor:pointer;font-weight:600;font-size:14px;}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .22s ease;font-size:13.3px;color:var(--text-muted);line-height:1.6;}
+  .faq-item.open .faq-a{max-height:300px;padding-top:10px;}
+  .faq-item .chev{transition:transform .18s;color:var(--text-muted);flex:0 0 auto;}
+  .faq-item.open .chev{transform:rotate(180deg);}
+
+  /* ---------- rodapé ---------- */
+  footer.page-footer{padding:38px 64px;color:var(--text-muted);font-size:12.5px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+
+  /* ---------- mobile ---------- */
+  .toc-toggle{display:none;}
+  @media (max-width:980px){
+    .toc-toggle{
+      display:flex;position:fixed;top:10px;left:14px;z-index:160;width:38px;height:38px;border-radius:50%;
+      background:var(--surface);border:1px solid var(--border);align-items:center;justify-content:center;box-shadow:var(--shadow);cursor:pointer;font-size:16px;color:var(--text);
+    }
+    .toc{position:fixed;left:0;top:0;z-index:155;transform:translateX(-100%);transition:transform .22s ease;box-shadow:0 0 0 100vmax rgba(0,0,0,0);}
+    .toc.open{transform:translateX(0);box-shadow:20px 0 60px rgba(0,0,0,.35);}
+    .hero{padding:76px 24px 44px;}
+    .hero h1{font-size:28px;}
+    .section{padding:40px 22px;}
+    footer.page-footer{padding:28px 22px;}
+  }
+  @media (max-width:640px){
+    .hero-stats{gap:22px;}
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<div class="util-bar">
+  <button class="util-btn" id="theme-toggle" title="Alternar tema claro/escuro" aria-label="Alternar tema">🌙</button>
+</div>
+<button class="toc-toggle" id="toc-toggle" aria-label="Abrir sumário">☰</button>
+
+<div class="shell">
+
+  <!-- ===================== SUMÁRIO / NAVEGAÇÃO ===================== -->
+  <nav class="toc" id="toc">
+    <div class="toc-brand">
+      <span class="dot"></span>
+      <div><strong>GRUPO LABMEDIC</strong><span>Manual do Call Center</span></div>
+    </div>
+
+    <div class="toc-group-label">Visão geral</div>
+    <a href="#inicio"><span class="ic">◆</span>Apresentação</a>
+    <a href="#conceitos"><span class="ic">🧩</span>Conceitos-chave</a>
+    <a href="#fluxo-geral"><span class="ic">↻</span>Fluxo de um atendimento</a>
+    <a href="#demo-animada"><span class="ic">🎬</span>Demonstração animada</a>
+
+    <div class="toc-group-label">Fluxos por nível de acesso</div>
+    <a href="#papel-tecnico"><span class="ic">👤</span>Técnico<span class="toc-tag tag-tecnico">base</span></a>
+    <a href="#papel-supervisor"><span class="ic">🛡</span>Supervisor<span class="toc-tag tag-supervisor">+gestão</span></a>
+    <a href="#papel-admin"><span class="ic">⚙</span>Admin. Pleno<span class="toc-tag tag-admin">total</span></a>
+
+    <div class="toc-group-label">Por que usar</div>
+    <a href="#vantagens"><span class="ic">📈</span>Vantagens</a>
+    <a href="#viabilidade"><span class="ic">🧭</span>Viabilidade &amp; aplicação</a>
+    <a href="#boas-praticas"><span class="ic">✅</span>Boas práticas</a>
+    <a href="#faq"><span class="ic">❓</span>Perguntas frequentes</a>
+  </nav>
+  <div class="sidebar-overlay" id="toc-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:150;"></div>
+
+  <!-- ===================== CONTEÚDO ===================== -->
+  <main class="main">
+
+    <!-- HERO -->
+    <header class="hero" id="inicio">
+      <span class="hero-eyebrow">📘 Manual de uso · v12</span>
+      <h1>Sistema de Atendimento Técnico do <em>GRUPO LABMEDIC</em></h1>
+      <p class="lead">Central de suporte via WhatsApp para equipamentos laboratoriais hospitalares: cada chamado vira um protocolo rastreável, do primeiro contato ao encerramento, com indicadores de gestão para quem supervisiona a operação.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><strong>3</strong><span>níveis de acesso</span></div>
+        <div class="hero-stat"><strong>9</strong><span>módulos funcionais</span></div>
+        <div class="hero-stat"><strong>100%</strong><span>histórico auditável</span></div>
+      </div>
+    </header>
+
+    <!-- ===================== CONCEITOS-CHAVE ===================== -->
+    <section class="section" id="conceitos">
+      <p class="section-kicker">Antes de começar</p>
+      <h2>Cinco conceitos que sustentam todo o sistema</h2>
+      <p class="intro">Entender esses termos deixa qualquer um dos três fluxos abaixo autoexplicativo — eles se repetem em todas as telas da aplicação.</p>
+      <div class="grid grid-2" style="margin-top:28px;">
+        <div class="card concept-card">
+          <div class="concept-ic">🎫</div>
+          <div><h3>Protocolo</h3><p>Identificador único (ex.: <span class="mono">AT-2026...</span>) gerado automaticamente a cada novo atendimento ou solicitação de volume de testes. É por ele que qualquer pessoa da equipe encontra o histórico completo de uma conversa.</p></div>
+        </div>
+        <div class="card concept-card">
+          <div class="concept-ic">☏</div>
+          <div><h3>Linha de WhatsApp</h3><p>Número que recebe os chamados. Pode operar em <b>modo manual</b> (abre o WhatsApp Web com a mensagem pronta) ou <b>modo API</b> (envia e recebe direto pelo sistema, sem trocar de aba).</p></div>
+        </div>
+        <div class="card concept-card">
+          <div class="concept-ic">🏥</div>
+          <div><h3>Cliente &amp; Equipamento</h3><p>Catálogo de unidades atendidas (hospitais, clínicas, laboratórios) e dos equipamentos instalados em cada uma, com número de série — a base que agiliza o preenchimento de um novo atendimento.</p></div>
+        </div>
+        <div class="card concept-card">
+          <div class="concept-ic">🛡</div>
+          <div><h3>Papéis de acesso</h3><p>Cada agente tem um papel — <b>Técnico</b>, <b>Supervisor</b> ou <b>Administrador Pleno</b> — que define o que aparece no menu lateral e quais ações estão disponíveis em cada tela.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== FLUXO GERAL ===================== -->
+    <section class="section" id="fluxo-geral">
+      <p class="section-kicker">Do primeiro contato ao encerramento</p>
+      <h2>O ciclo de vida de um atendimento</h2>
+      <p class="intro">Independente de quem opera, todo chamado percorre este caminho — o que muda por papel é quem pode ver, criar ou editar cada etapa (detalhado nas seções seguintes).</p>
+      <div class="flow" style="margin-top:28px;">
+        <div class="flow-step"><div class="num">1</div><h4>Chamado chega</h4><p>Cliente manda mensagem numa Linha, ou o próprio agente registra o contato (telefone/presencial).</p></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="num">2</div><h4>Protocolo gerado</h4><p>Sistema cria o número do protocolo e monta a mensagem inicial pronta para envio.</p></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="num">3</div><h4>Atendimento assumido</h4><p>Um técnico assume o caso — sozinho, se já o criou, ou pela Caixa de Entrada, se veio direto da API.</p></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="num">4</div><h4>Conversa registrada</h4><p>Procedimentos, observações, áudios e vídeos trocados com o cliente ficam anexados ao protocolo.</p></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="num">5</div><h4>Encerramento</h4><p>Técnico encerra com uma categoria de motivo — ou transfere para outro colega, se o caso não for dele.</p></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="num">6</div><h4>Auditoria &amp; métricas</h4><p>O protocolo fica disponível no Histórico e, para a supervisão, nos indicadores de performance.</p></div>
+      </div>
+    </section>
+
+    <!-- ===================== DEMONSTRAÇÃO ANIMADA ===================== -->
+    <section class="section" id="demo-animada">
+      <p class="section-kicker">Veja em movimento</p>
+      <h2>Demonstração animada: da mensagem do cliente ao início do suporte</h2>
+      <p class="intro">Uma simulação visual dos 5 primeiros passos do fluxo — desde a mensagem chegar pelo WhatsApp até o técnico assumir o protocolo e abrir a conversa.</p>
+
+      <div class="demo-note">ℹ️ <span><b>Isto é uma simulação ilustrativa</b> (não é uma gravação da aplicação real) — construída para explicar a sequência de telas e ações. Os nomes, números e mensagens são fictícios.</span></div>
+
+      <div class="demo-player">
+        <div class="demo-stage" id="demo-stage">
+
+          <!-- LADO CLIENTE: WhatsApp -->
+          <div class="demo-phone">
+            <div class="demo-phone-screen">
+              <div class="demo-phone-header"><span class="av">🏥</span> Suporte Técnico — RJ</div>
+              <div class="demo-phone-chat" id="demo-chat-cliente">
+                <div class="demo-bubble in" data-el="msg-cliente">Bom dia! O analisador X200 não liga depois de uma queda de energia 🙁</div>
+                <div class="demo-typing" data-el="digitando-tecnico"><i></i><i></i><i></i></div>
+                <div class="demo-bubble out" data-el="msg-tecnico">Olá! Aqui é o suporte do Grupo Labmedic. Já abri seu protocolo e já te ajudo — pode confirmar se a luz do painel acende?</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- COLUNA CENTRAL: PROTOCOLO -->
+          <div class="demo-ticket-col">
+            <span class="demo-ticket-arrow" data-el="seta1">→</span>
+            <div class="demo-ticket-chip" data-el="ticket">AT-2026-01452</div>
+            <span class="demo-ticket-arrow" data-el="seta2">→</span>
+          </div>
+
+          <!-- LADO TÉCNICO: APLICAÇÃO -->
+          <div class="demo-app">
+            <div class="demo-app-bar"><span class="dot"></span> Atendimentos ativos</div>
+            <div class="demo-app-body">
+
+              <div class="demo-app-group" data-el="grupo-nao-assumidos">
+                <p class="demo-app-group-label">📥 Não assumidos</p>
+                <div class="demo-card" data-el="card-lista">
+                  <div class="ic">🏥</div>
+                  <div class="info"><strong>Hospital São Lucas — Un. Barra</strong><span>Analisador X200 · AT-2026-01452</span></div>
+                  <span class="badge-demo aguardando" data-el="badge-status">Aguardando</span>
+                  <button class="btn-assumir" data-el="btn-assumir">Assumir</button>
+                </div>
+              </div>
+
+              <div class="demo-app-group" data-el="grupo-andamento">
+                <p class="demo-app-group-label">🛠 Em andamento</p>
+              </div>
+
+              <div class="demo-cursor" data-el="cursor">🖱️</div>
+              <div class="demo-click-ring" data-el="click-ring"></div>
+
+              <div class="demo-detail" data-el="detail">
+                <div class="demo-detail-head"><span class="proto">AT-2026-01452</span><span>Hospital São Lucas — Un. Barra</span></div>
+                <div class="demo-detail-chat">
+                  <div class="demo-bubble in show" style="align-self:flex-start;">Bom dia! O analisador X200 não liga depois de uma queda de energia 🙁</div>
+                  <div class="demo-bubble out" data-el="detail-resposta">Olá! Aqui é o suporte do Grupo Labmedic. Já abri seu protocolo e já te ajudo — pode confirmar se a luz do painel acende?</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-caption">
+          <div class="step-ic" id="demo-step-num">1</div>
+          <div><p id="demo-step-title">Cliente envia mensagem pelo WhatsApp</p><span id="demo-step-desc">A conversa chega numa das linhas cadastradas no sistema.</span></div>
+        </div>
+
+        <div class="demo-controls">
+          <button class="demo-btn" id="demo-restart" title="Reiniciar" aria-label="Reiniciar demonstração">↺</button>
+          <button class="demo-btn" id="demo-prev" title="Passo anterior" aria-label="Passo anterior">◀</button>
+          <button class="demo-btn demo-play" id="demo-play" title="Pausar/reproduzir" aria-label="Pausar ou reproduzir">⏸</button>
+          <button class="demo-btn" id="demo-next" title="Próximo passo" aria-label="Próximo passo">▶</button>
+          <div class="demo-controls-sep"></div>
+          <button class="demo-btn" id="demo-narracao" title="Ativar narração por voz" aria-label="Ativar ou desativar narração por voz">🔈</button>
+          <div class="demo-dots" id="demo-dots"></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="papel-tecnico">
+      <p class="section-kicker">Passo a passo completo</p>
+      <h2>O que cada nível de acesso pode fazer</h2>
+      <p class="intro">Os papéis são cumulativos: o Supervisor tem tudo do Técnico, e o Administrador Pleno tem tudo do Supervisor. Escolha uma aba para ver o fluxo completo daquele nível.</p>
+
+      <span id="papel-supervisor" class="anchor-offset"></span>
+      <span id="papel-admin" class="anchor-offset"></span>
+      <div class="role-tabs" role="tablist">
+        <button class="role-tab active" data-role="tecnico"><span class="role-dot" style="background:var(--tecnico);"></span>Técnico</button>
+        <button class="role-tab" data-role="supervisor"><span class="role-dot" style="background:var(--supervisor);"></span>Supervisor</button>
+        <button class="role-tab" data-role="admin"><span class="role-dot" style="background:var(--admin);"></span>Administrador Pleno</button>
+      </div>
+
+      <!-- ---------- PAINEL TÉCNICO ---------- -->
+      <div class="role-panel active" data-role-panel="tecnico" id="papel-tecnico-panel">
+        <div class="role-intro tecnico">
+          <div>
+            <strong>Nível base — operação do dia a dia</strong>
+            <p>Todo agente entra como Técnico. É o papel que abre um chamado, conversa com o cliente pelo WhatsApp e encerra o protocolo. Consulta clientes, equipamentos e linhas, mas não os cadastra.</p>
+          </div>
+        </div>
+
+        <div class="feat open">
+          <div class="feat-head"><span class="ic">◆</span><span class="ttl">Painel (Dashboard)</span><span class="chev">▾</span></div>
+          <div class="feat-body"><div class="feat-body-inner">
+            <p class="desc">Visão consolidada dos seus próprios protocolos assim que você faz login.</p>
+            <ol class="steps">
+              <li>Ao entrar, veja os cartões <b>Em aberto</b>, <b>Em andamento</b> e <b>Protocolos hoje</b> — clique em qualquer um para filtrar a lista abaixo por aquele critério.</li>
+              <li>Use <b>🔍 Buscar cliente/equipamento</b> no topo para localizar rapidamente um atendimento sem sair do painel.</li>
+              <li>Confira os <b>últimos protocolos</b> na tabela inferior; clique numa linha para abrir o detalhe completo.</li>
+            </ol>
+          </div></div>
+        </div>
+
+        <div class="feat">
+          <div class="feat-head"><span class="ic">＋</span><span class="ttl">Novo Atendimento</span><span class="chev">▾</span></div>
+          <div class="feat-body"><div class="feat-body-inner">
+            <p class="desc">Abre um protocolo e monta a mensagem inicial para o cliente em segundos.</p>
+            <ol class="steps">
+              <li>Selecione a <b>Linha</b> que recebeu o chamado.</li>
+              <li>Digite a <b>Unidade</b> do cliente — se ela já existir no catálogo, selecione o resultado para preencher os dados automaticamente; senão, digite os dados manualmente.</li>
+              <li>Informe o <b>WhatsApp do cliente</b>, o <b>Equipamento</b> (também com busca no catálogo) e a <b>descrição do problema</b>.</li>
+              <li>Opcionalmente, adicione um <b>procedimento sugerido</b> e outras <b>observações do cliente</b> — acompanhe a prévia da mensagem à direita.</li>
+              <li>Clique em <b>Gerar protocolo</b>. O número do protocolo aparece na tela e o botão <b>📱 Abrir WhatsApp e enviar ao cliente</b> já leva a mensagem pronta.</li>
+              <li>Se quiser complementar antes de enviar, use <b>🎤 Áudio</b> ou <b>🎥 Vídeo</b> (linhas em modo API) ou <b>📹 Anexar vídeo</b> já gravado.</li>
+            </ol>
+            <div class="tip">💡 <span>O protocolo já nasce registrado como seu — você o encontrará em <b>Atendimentos Ativos</b> assim que sair desta tela.</span></div>
+          </div></div>
+        </div>
+
+        <div class="feat">
+          <div class="feat-head"><span class="ic">📊</span><span class="ttl">Solicitar Volume de Testes</span><span class="chev">▾</span></div>
+          <div class="feat-body"><div class="feat-body-inner">
+            <p class="desc">Gera um protocolo específico para pedir a um colaborador da unidade o volume de testes de um ou mais equipamentos — útil para apuração de faturamento ou contratos.</p>
+            <ol class="steps">
+              <li>Escolha a <b>Linha</b> que envia o pedido e a <b>Unidade</b>.</li>
+              <li>Informe o <b>colaborador</b> que vai responder e o WhatsApp dele.</li>
+              <li>Adicione um ou mais <b>equipamentos</b> (busca no catálogo ou texto livre separado por vírgula) e, se souber, o <b>período de referência</b>.</li>
+              <li>Clique em <b>Gerar protocolo</b> e envie pelo WhatsApp.</li>
+              <li>Quando o colaborador responder com os números (e eventual print), volte a este protocolo pelo botão <b>Abrir este protocolo para anexar a resposta</b>.</li>
+            </ol>
+          </div></div>
+        </div>
+
+        <div class="feat">
+          <div class="feat-head"><span class="ic">☰</span><span class="ttl">Atendimentos Ativos</span><span class="chev">▾</span></div>
+          <div class="feat-body"><div class="feat-body-inner">
+            <p class="desc">Lista os chamados em aberto ou em andamento — os seus e, quando existir, os que chegaram pela API sem responsável ainda.</p>
+            <ol class="steps">
+              <li>Na seção <b>📥 Não assumidos</b> (Caixa de Entrada), qualquer técnico pode clicar em <b>Assumir</b> para se tornar responsável por uma solicitação recebida diretamente pelo WhatsApp.</li>
+              <li>Em <b>🛠 Em andamento</b>, clique num protocolo para abrir o detalhe e continuar a conversa.</li>
+              <li>Dentro do detalhe, use <b>Transferir / reenviar histórico</b> para passar o caso a outro colega — o histórico completo vai junto.</li>
+              <li>Quando o problema estiver resolvido, use <b>Encerrar atendimento</b> e escolha a categoria de encerramento adequada.</li>
+            </ol>
+            <div class="warn">⚠️ Depois de assumido, o atendimento some da Caixa de Entrada para os demais — evite deixar chamados abertos por muito tempo sem assumir.</div>
+          </div></div>
+        </div>
+
+        <div class="feat">
+          <div class="feat-head"><span class="ic">⏱</span><span class="ttl">Histórico &amp; Auditoria</span><span class="chev">▾</span></div>
+          <div class="feat-body"><div class="feat-body-inner">
+            <p class="desc">Todos os protocolos que você já atendeu, com filtros e exportação.</p>
+            <ol class="steps">
+              <li>Filtre por <b>período</b>, número de <b>protocolo</b>, <b>linha</b> ou <b>status</b>.</li>
+              <li>Use <b>👁 PDF</b> para visualizar um relatório imprimível ou <b>⬇ Excel</b> para exportar a planilha.</li>
+              <li>Clique em <b>Carregar mais resultados</b> para paginar históricos extensos.</li>
+            </ol>
+          </div></div>
+        </div>
+
+        <div class="feat">
+          <div class="feat-head"><span class="ic">☏🏥</span><span class="ttl">Linhas &amp; Catálogo (consulta)</span><span class="chev">▾</span></div>
+          <div class="feat-body"><div class="feat-body-inner">
+            <p class="desc">O Técnico consulta as linhas de WhatsApp cadastradas e o catálogo de clientes/equipamentos livremente pelas caixas de busca — cadastro, edição e inativação são exclusivos do Supervisor e do Administrador Pleno.</p>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- ---------- PAINEL SUPERVISOR ---------- -->
+      <div class="role-panel" data-role-panel="supervisor" id="papel-supervisor-panel">
+        <div class="role-intro supervisor">
+          <div>
+            <strong>Gestão operacional — herda tudo do Técnico</strong>
+            <p>Além de atender chamados, o Supervisor organiza a base de dados que sustenta a operação (linhas, clientes, equipamentos, categorias) e acompanha a equipe inteira.</p>
+          </div>
+        </div>
+
+        <div class="feat open">
+          <div class="feat-head"><span class="ic">☏</span><span class="ttl">Linhas de WhatsApp — cadastro completo</span><span class="chev">▾</span></div>
+          <div class="feat-body"><div class="feat-body-inner">
+            <p class="desc">Cadastra e mantém os números que recebem chamados.</p>
+            <ol class="steps">
+              <li>Em <b>Linhas WhatsApp</b>, preencha <b>Nome da linha</b> e <b>Número</b> e clique em <b>Adicionar linha</b>.</li>
+              <li>Ative, inative ou edite linhas existentes na lista ao lado.</li>
+            </ol>
+            <div class="tip">💡 <span>Linhas com histórico não podem ser excluídas — inative-as para preservar a rastreabilidade dos protocolos antigos.</span></div>
+          </div></div>
+        </div>
+
+        <div class="feat">
+          <div class="feat-head"><span class="ic">🏥</span><span class="ttl">Clientes &amp; Equipamentos — cadastro e importação</span><span class="chev">▾</span></div>
+          <div class="feat-body"><div class="feat-body-inner">
+            <p class="desc">Mantém a base que acelera o preenchimento de um novo atendimento para toda a equipe.</p>
+            <ol class="steps">
+              <li>Cadastre uma <b>Unidade</b> (cliente) com categoria e WhatsApp principal, ou clique numa linha da lista para editar.</li>
+              <li>Cadastre um <b>Equipamento</b>, vinculando-o à unidade onde está instalado e ao número de série.</li>
+              <li>Para grandes volumes, use <b>📥 Importar planilha</b> (.xlsx com colunas REGIÃO, CATEGORIA, UNIDADE, EQUIPAMENTO, SERIAL) — clientes e equipamentos já existentes são atualizados, nunca duplicados.</li>
+            </ol>
+          </div></div>
+        </div>
+
+        <div class="feat">
+          <div class="feat-head"><span class="ic">🏷</span><span class="ttl">Categorias de Encerramento</span><span class="chev">▾</span></div>
+          <div class="feat-body"><div class="feat-body-inner">
+            <p class="desc">Define os motivos que aparecem para o técnico escolher ao encerrar um atendimento — padroniza os relatórios de causa-raiz.</p>
+            <ol class="steps">
+              <li>Cadastre uma nova categoria com um nome claro (ex.: "Reinicialização resolveu", "Peça substituída", "Encaminhado à assistência externa").</li>
+              <li>Edite ou remova categorias que não fizerem mais sentido para a operação.</li>
+            </ol>
+          </div></div>
+        </div>
+
+        <div class="feat">
+          <div class="feat-head"><span class="ic">🛡</span><span class="ttl">Todos os Atendimentos (Supervisão)</span><span class="chev">▾</span></div>
+          <div class="feat-body"><div class="feat-body-inner">
+            <p class="desc">Visão global de todos os protocolos, de todos os agentes e linhas — com indicadores de performance.</p>
+            <ol class="steps">
+              <li>Acompanhe os cartões <b>Total de protocolos</b>, <b>Em aberto</b> e <b>Protocolos hoje</b> da operação inteira.</li>
+              <li>Em <b>Métricas de performance</b>, alterne entre as abas <b>Unidade</b>, <b>Cliente</b>, <b>Equipamento</b>, <b>Agente</b> e <b>Linha de captação</b> para ver volume e tempo médio de atendimento por dimensão.</li>
+              <li>Filtre a listagem por período, protocolo, agente, linha ou status — os gráficos acima refletem automaticamente o filtro aplicado.</li>
+              <li>Exporte em <b>👁 PDF</b> ou <b>⬇ Excel</b> para relatórios gerenciais.</li>
+            </ol>
+          </div></div>
+        </div>
+
+        <div class="feat">
+          <div class="feat-head"><span class="ic">👤</span><span class="ttl">Agentes — gestão da equipe</span><span class="chev">▾</span></div>
+          <div class="feat-body"><div class="feat-body-inner">
+            <p class="desc">Cria e administra os acessos da equipe.</p>
+            <ol class="steps">
+              <li>Em <b>Agentes</b>, preencha nome, e-mail e uma senha provisória para <b>Criar agente</b> — a conta já entra confirmada e pronta para uso (oriente a pessoa a trocar a senha no primeiro acesso).</li>
+              <li>Escolha o <b>papel inicial</b>: como Supervisor, você pode criar Técnicos ou outros Supervisores (não pode criar um Administrador Pleno).</li>
+              <li>Na lista da equipe, use <b>Tornar supervisor / Remover supervisor</b> para promover ou rebaixar um Técnico — essa ação não alcança quem já é Administrador Pleno.</li>
+              <li>Use <b>Ativar / Inativar</b> para suspender o acesso de alguém sem apagar seu histórico de atendimentos.</li>
+            </ol>
+            <div class="warn">⚠️ Um Supervisor nunca consegue alterar o papel de um Administrador Pleno — essa gestão é exclusiva do próprio Administrador Pleno.</div>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- ---------- PAINEL ADMIN PLENO ---------- -->
+      <div class="role-panel" data-role-panel="admin" id="papel-admin-panel">
+        <div class="role-intro admin">
+          <div>
+            <strong>Governança total — herda tudo do Supervisor</strong>
+            <p>O Administrador Pleno tem uma única atribuição exclusiva, mas estrutural: controlar por completo a hierarquia de papéis da equipe, incluindo outros Administradores Plenos.</p>
+          </div>
+        </div>
+
+        <div class="feat open">
+          <div class="feat-head"><span class="ic">⚙</span><span class="ttl">Controle completo de papéis</span><span class="chev">▾</span></div>
+          <div class="feat-body"><div class="feat-body-inner">
+            <p class="desc">Em vez do botão binário "tornar/remover supervisor", o Administrador Pleno vê, na tela <b>Agentes</b>, um seletor com os três níveis para cada pessoa da equipe.</p>
+            <ol class="steps">
+              <li>Localize o agente na lista e use o seletor de papel para definir <b>Técnico</b>, <b>Supervisor</b> ou <b>Administrador Pleno</b>.</li>
+              <li>Ao criar um novo agente, a opção <b>Administrador Pleno</b> só aparece no formulário para quem já tem esse papel — ninguém promove alguém a um nível acima do seu próprio pela interface.</li>
+              <li>Use este nível com critério: um Administrador Pleno pode alterar o papel de qualquer pessoa, inclusive de outro Administrador Pleno.</li>
+            </ol>
+            <div class="tip">💡 <span>Reserve este papel a quem responde pela governança da operação como um todo — o dia a dia de atendimento e gestão da base já é plenamente coberto pelo Supervisor.</span></div>
+          </div></div>
+        </div>
+
+        <div class="feat">
+          <div class="feat-head"><span class="ic">🧭</span><span class="ttl">O que já vem do Supervisor</span><span class="chev">▾</span></div>
+          <div class="feat-body"><div class="feat-body-inner">
+            <p class="desc">Todo o restante da experiência do Administrador Pleno é idêntico ao do Supervisor: cadastro de linhas, clientes e equipamentos, importação de planilhas, categorias de encerramento, visão de Supervisão com métricas e exportações, além de tudo o que um Técnico já faz no atendimento do dia a dia.</p>
+          </div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== VANTAGENS ===================== -->
+    <section class="section" id="vantagens">
+      <p class="section-kicker">Por que adotar</p>
+      <h2>Vantagens de centralizar o atendimento técnico aqui</h2>
+      <p class="intro">Ganhos que aparecem tanto para quem atende quanto para quem gerencia a operação.</p>
+      <div class="grid grid-3" style="margin-top:26px;">
+        <div class="card adv-card"><div class="adv-num">01</div><h3>Rastreabilidade total</h3><p>Cada mensagem, procedimento e observação fica anexado ao protocolo — nada se perde numa troca de turno ou de técnico.</p></div>
+        <div class="card adv-card"><div class="adv-num">02</div><h3>Resposta mais ágil</h3><p>A mensagem inicial já sai pronta com dados do cliente e do equipamento, reduzindo o tempo entre o chamado chegar e o primeiro retorno.</p></div>
+        <div class="card adv-card"><div class="adv-num">03</div><h3>Gestão por indicadores</h3><p>Volume, status e tempo médio por unidade, cliente, equipamento, agente ou linha — visíveis num único painel, sem planilhas paralelas.</p></div>
+        <div class="card adv-card"><div class="adv-num">04</div><h3>Continuidade sem atrito</h3><p>Transferir um atendimento leva o histórico completo junto — quem assume não precisa perguntar o que já foi feito.</p></div>
+        <div class="card adv-card"><div class="adv-num">05</div><h3>Acesso proporcional à função</h3><p>Três papéis bem definidos evitam tanto o excesso de permissões quanto o gargalo de depender de uma única pessoa para tudo.</p></div>
+        <div class="card adv-card"><div class="adv-num">06</div><h3>Base de dados reaproveitável</h3><p>Clientes e equipamentos cadastrados uma vez agilizam todos os atendimentos futuros daquela unidade.</p></div>
+      </div>
+    </section>
+
+    <!-- ===================== VIABILIDADE / APLICABILIDADE ===================== -->
+    <section class="section" id="viabilidade">
+      <p class="section-kicker">Onde isso faz diferença</p>
+      <h2>Viabilidade e aplicabilidade no dia a dia</h2>
+      <div class="grid grid-2" style="margin-top:26px;">
+        <div class="card">
+          <h3>🏥 Assistência técnica hospitalar e laboratorial</h3>
+          <p>Feito sob medida para equipes que dão suporte remoto a equipamentos de análises clínicas em múltiplas unidades — o cenário exato do GRUPO LABMEDIC, mas replicável para qualquer central de suporte técnico via WhatsApp.</p>
+        </div>
+        <div class="card">
+          <h3>📱 Dois modos de operação com WhatsApp</h3>
+          <p>Funciona tanto com <b>WhatsApp Web tradicional</b> (o sistema apenas monta a mensagem e abre o link) quanto com uma <b>API oficial</b> integrada, que permite conversar, gravar áudio/vídeo e receber mensagens diretamente na plataforma — a operação escolhe o nível de integração que faz sentido para cada linha.</p>
+        </div>
+        <div class="card">
+          <h3>📈 Cresce junto com a operação</h3>
+          <p>Novas unidades e equipamentos entram por cadastro manual ou importação de planilha; novos agentes entram com o papel adequado desde o primeiro dia — sem retrabalho de configuração.</p>
+        </div>
+        <div class="card">
+          <h3>🔐 Segurança por hierarquia de papéis</h3>
+          <p>Como o acesso é sempre o menor necessário para a função de cada pessoa, a operação reduz o risco de alterações indevidas em cadastros críticos ou no histórico de atendimentos.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== BOAS PRÁTICAS ===================== -->
+    <section class="section" id="boas-praticas">
+      <p class="section-kicker">Para tirar o máximo do sistema</p>
+      <h2>Boas práticas recomendadas</h2>
+      <div class="grid grid-2" style="margin-top:26px;">
+        <div class="card"><h3>✅ Assuma rápido o que está na Caixa de Entrada</h3><p>Chamados vindos da API sem responsável ficam visíveis a toda a equipe — quanto mais tempo sem assumir, maior o risco de resposta atrasada ao cliente.</p></div>
+        <div class="card"><h3>✅ Sempre escolha uma categoria ao encerrar</h3><p>Isso é o que alimenta os relatórios de causa-raiz do Supervisor — encerrar sem categoria reduz a qualidade da análise de indicadores.</p></div>
+        <div class="card"><h3>✅ Cadastre o cliente e o equipamento antes de abrir o chamado</h3><p>Evita duplicidade de nomes parecidos e acelera o preenchimento de "Novo Atendimento" via busca automática.</p></div>
+        <div class="card"><h3>✅ Revise os papéis periodicamente</h3><p>Supervisores e Administradores Plenos devem confirmar de tempos em tempos se o nível de acesso de cada pessoa ainda corresponde à função atual dela na equipe.</p></div>
+      </div>
+    </section>
+
+    <!-- ===================== FAQ ===================== -->
+    <section class="section" id="faq" style="border-bottom:none;">
+      <p class="section-kicker">Dúvidas comuns</p>
+      <h2>Perguntas frequentes</h2>
+      <div style="margin-top:22px;max-width:760px;">
+        <div class="faq-item open">
+          <div class="faq-q"><span>Como um novo agente recebe acesso ao sistema?</span><span class="chev">▾</span></div>
+          <div class="faq-a"><p>Um Supervisor ou Administrador Pleno cria o acesso pela tela <b>Agentes</b>, definindo nome, e-mail, senha provisória e papel inicial. A conta já nasce confirmada; recomenda-se que a pessoa troque a senha no primeiro login.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>Um Técnico consegue ver os atendimentos de outros colegas?</span><span class="chev">▾</span></div>
+          <div class="faq-a"><p>Não diretamente — o painel e o histórico do Técnico mostram apenas os protocolos sob sua própria responsabilidade. A visão de todos os agentes e linhas é exclusiva de Supervisor e Administrador Pleno, na tela <b>Todos os atendimentos</b>.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>É possível voltar um Supervisor para Técnico?</span><span class="chev">▾</span></div>
+          <div class="faq-a"><p>Sim. Um Supervisor pode rebaixar outro Supervisor pelo botão "Remover supervisor" (desde que não seja Administrador Pleno); o Administrador Pleno pode ajustar o papel de qualquer pessoa, para qualquer um dos três níveis, pelo seletor completo.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>O que acontece se eu excluir uma linha de WhatsApp com histórico?</span><span class="chev">▾</span></div>
+          <div class="faq-a"><p>O sistema não permite excluir linhas com atendimentos vinculados, justamente para preservar a rastreabilidade. Nesses casos, inative a linha em vez de tentar excluí-la.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>Este manual reflete permissões em tempo real?</span><span class="chev">▾</span></div>
+          <div class="faq-a"><p>Ele descreve o comportamento padrão da versão atual da aplicação. As permissões efetivas de cada conta são sempre controladas pelo sistema e pelo banco de dados — este documento é um guia de apoio, não a fonte de verdade sobre acesso.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="page-footer">
+      <span>GRUPO LABMEDIC © — Manual de uso interno do Call Center</span>
+      <span>Este documento é um guia de apoio; a aplicação é a fonte oficial de dados e permissões.</span>
+    </footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  const $ = (s,c)=> (c||document).querySelector(s);
+  const $$ = (s,c)=> Array.from((c||document).querySelectorAll(s));
+
+  /* ---------- tema claro/escuro ---------- */
+  const themeBtn = $('#theme-toggle');
+  function applyTheme(t){
+    document.documentElement.setAttribute('data-theme', t);
+    themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+    try{ localStorage.setItem('labmedic-tutorial-theme', t); }catch(e){}
+  }
+  let savedTheme = 'light';
+  try{ savedTheme = localStorage.getItem('labmedic-tutorial-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark':'light'); }catch(e){}
+  applyTheme(savedTheme);
+  themeBtn.addEventListener('click', ()=>{
+    applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+
+  /* ---------- barra de progresso de leitura ---------- */
+  const progressBar = $('#progress-bar');
+  function updateProgress(){
+    const h = document.documentElement;
+    const scrolled = h.scrollTop;
+    const max = h.scrollHeight - h.clientHeight;
+    progressBar.style.width = (max > 0 ? (scrolled/max)*100 : 0) + '%';
+  }
+  document.addEventListener('scroll', updateProgress, {passive:true});
+  updateProgress();
+
+  /* ---------- sumário: destaque do item ativo (scroll-spy) ---------- */
+  const tocLinks = $$('.toc a');
+  const sections = tocLinks
+    .map(a => document.querySelector(a.getAttribute('href')))
+    .filter(Boolean);
+  function updateActiveTocLink(){
+    let current = sections[0];
+    const probe = window.scrollY + 130;
+    sections.forEach(sec => { if(sec.offsetTop <= probe) current = sec; });
+    tocLinks.forEach(a=>{
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current.id);
+    });
+  }
+  document.addEventListener('scroll', updateActiveTocLink, {passive:true});
+  updateActiveTocLink();
+
+  /* ---------- sumário: abrir/fechar no mobile ---------- */
+  const toc = $('#toc');
+  const tocToggle = $('#toc-toggle');
+  const tocOverlay = $('#toc-overlay');
+  function openToc(){ toc.classList.add('open'); tocOverlay.style.display='block'; }
+  function closeToc(){ toc.classList.remove('open'); tocOverlay.style.display='none'; }
+  tocToggle.addEventListener('click', openToc);
+  tocOverlay.addEventListener('click', closeToc);
+  tocLinks.forEach(a=> a.addEventListener('click', closeToc));
+
+  /* ---------- abas de papel (Técnico / Supervisor / Admin Pleno) ---------- */
+  const roleTabs = $$('.role-tab');
+  const rolePanels = $$('.role-panel');
+  roleTabs.forEach(tab=>{
+    tab.addEventListener('click', ()=>{
+      const role = tab.dataset.role;
+      roleTabs.forEach(t=> t.classList.toggle('active', t === tab));
+      rolePanels.forEach(p=> p.classList.toggle('active', p.dataset.rolePanel === role));
+    });
+  });
+  // Links do sumário que apontam para um papel específico também trocam a aba
+  document.addEventListener('click', (ev)=>{
+    const link = ev.target.closest('a[href^="#papel-"]');
+    if(!link) return;
+    const map = {'#papel-tecnico':'tecnico','#papel-supervisor':'supervisor','#papel-admin':'admin'};
+    const role = map[link.getAttribute('href')];
+    if(!role) return;
+    roleTabs.forEach(t=>{
+      if(t.dataset.role === role){ t.click(); }
+    });
+  });
+
+  /* ---------- acordeão de funcionalidades ---------- */
+  $$('.feat-head').forEach(head=>{
+    head.addEventListener('click', ()=>{
+      head.closest('.feat').classList.toggle('open');
+    });
+  });
+
+  /* ---------- FAQ ---------- */
+  $$('.faq-q').forEach(q=>{
+    q.addEventListener('click', ()=>{
+      q.closest('.faq-item').classList.toggle('open');
+    });
+  });
+
+  /* ---------- demonstração animada do fluxo de atendimento ---------- */
+  const stage = $('#demo-stage');
+  if (stage) {
+    const el = (name) => stage.querySelector(`[data-el="${name}"]`);
+    const els = {
+      msgCliente: el('msg-cliente'),
+      digitando: el('digitando-tecnico'),
+      msgTecnico: el('msg-tecnico'),
+      seta1: el('seta1'),
+      ticket: el('ticket'),
+      seta2: el('seta2'),
+      grupoNaoAssumidos: el('grupo-nao-assumidos'),
+      grupoAndamento: el('grupo-andamento'),
+      cardLista: el('card-lista'),
+      badgeStatus: el('badge-status'),
+      btnAssumir: el('btn-assumir'),
+      cursor: el('cursor'),
+      clickRing: el('click-ring'),
+      detail: el('detail'),
+      detailResposta: el('detail-resposta'),
+    };
+
+    const steps = [
+      {
+        title: 'Cliente envia mensagem pelo WhatsApp',
+        desc: 'A conversa chega numa das linhas cadastradas no sistema.',
+        duration: 3600,
+        apply(){
+          els.msgCliente.classList.add('show');
+        }
+      },
+      {
+        title: 'Sistema gera o protocolo automaticamente',
+        desc: 'Um número de protocolo único é criado para essa conversa.',
+        duration: 3200,
+        apply(){
+          els.seta1.style.opacity = '.5';
+          els.ticket.classList.add('show');
+        }
+      },
+      {
+        title: 'A solicitação entra na Caixa de Entrada',
+        desc: '"Não assumidos": qualquer técnico disponível pode ver e assumir.',
+        duration: 3400,
+        apply(){
+          els.seta2.style.opacity = '.5';
+          els.grupoNaoAssumidos.classList.add('active');
+          els.cardLista.classList.add('show');
+        }
+      },
+      {
+        title: 'Um técnico assume o atendimento',
+        desc: 'Ao clicar em "Assumir", o caso passa a ser dele.',
+        duration: 3600,
+        apply(){
+          // move cursor até o botão "Assumir" e simula o clique
+          const stageRect = stage.getBoundingClientRect();
+          const btnRect = els.btnAssumir.getBoundingClientRect();
+          const bodyRect = els.cursor.parentElement.getBoundingClientRect();
+          els.cursor.style.left = '10px';
+          els.cursor.style.top = '10px';
+          els.cursor.classList.add('show');
+          requestAnimationFrame(()=>{
+            els.cursor.style.left = (btnRect.left - bodyRect.left + 6) + 'px';
+            els.cursor.style.top = (btnRect.top - bodyRect.top + 6) + 'px';
+          });
+          setTimeout(()=>{
+            els.clickRing.style.left = (btnRect.left - bodyRect.left - 4) + 'px';
+            els.clickRing.style.top = (btnRect.top - bodyRect.top - 4) + 'px';
+            els.clickRing.classList.remove('ping'); void els.clickRing.offsetWidth; els.clickRing.classList.add('ping');
+            els.badgeStatus.textContent = 'Em andamento';
+            els.badgeStatus.classList.remove('aguardando');
+            els.badgeStatus.classList.add('andamento');
+            els.btnAssumir.textContent = 'Abrir';
+            els.grupoAndamento.classList.add('active');
+          }, 650);
+          setTimeout(()=>{ els.cursor.classList.remove('show'); }, 1300);
+        }
+      },
+      {
+        title: 'Suporte começa no chat do protocolo',
+        desc: 'O técnico responde e a conversa fica registrada no histórico.',
+        duration: 4200,
+        apply(){
+          els.detail.classList.add('show');
+          setTimeout(()=> els.digitando.classList.add('show'), 500);
+          setTimeout(()=>{
+            els.digitando.classList.remove('show');
+            els.msgTecnico.classList.add('show');
+            els.detailResposta.classList.add('show');
+          }, 1700);
+        }
+      },
+    ];
+
+    let current = 0;
+    let playing = true;
+    let timer = null;
+    let encerrado = false;  // true após a narração final — nada auto-avança; play reseta
+
+    /* ---------- narração por voz (Web Speech API, com suporte multi-navegador) ---------- */
+    const narracaoSuportada = 'speechSynthesis' in window;
+    const narracaoBtn = $('#demo-narracao');
+    let narrando = false;
+    let vozPt = null;
+    let vozF = null;     // voz pt-BR feminina detectada pelo nome
+    let vozM = null;     // voz pt-BR masculina detectada pelo nome (reserva)
+    let vozEhFeminina = false; // true quando há voz feminina nativa disponível
+    let pitchPadrao = 1;       // 1 quando a voz é feminina natural; ~1.08 quando precisamos suavizar
+    let vozPronta = false;
+    let _falaAtiva = false;
+    let _keepAliveToken = null;
+    const _utterancesAtivos = []; // referência em escopo de módulo: impede o GC de cortar a fala no meio
+
+    function carregarVozPt(){
+      if (!narracaoSuportada) return;
+      let vozes = [];
+      try { vozes = speechSynthesis.getVoices() || []; } catch(e){ vozes = []; }
+      if (!vozes.length) return;
+      // 1) prioriza falantes nativos pt-BR; se não houver, cai para qualquer pt
+      const ptBR = vozes.filter(v => /pt[-_]BR/i.test(v.lang || ''));
+      const pts  = ptBR.length ? ptBR : vozes.filter(v => /^pt/i.test(v.lang || ''));
+      if (!pts.length) return;
+      // 2) identifica vozes femininas pelo nome (varia por engine, então usamos heurística ampla)
+      const chaveF = /(female|feminin[ao]|mulher|samantha|vitoria|victoria|maria|lucia|luciana|helena|camila|sofia|alice|paulina|vivian|francisca|gabriela|google\s*(brasil|pt))/i;
+      const chaveM = /(male|masculin[ao]|homem|daniel|ricardo|paulo|andre|joa[o]|pedro|marcos)/i;
+      vozF = pts.find(v => chaveF.test(v.name || '')) || null;
+      vozM = pts.find(v => chaveM.test(v.name || '')) || null;
+      // 3) seleção final: voz feminina tem prioridade; depois qualquer pt-BR
+      vozPt = vozF || pts[0] || vozPt;
+      vozEhFeminina = !!vozF;
+      // 4) ajuste sutil de tom para suavizar quando não houver voz feminina natural;
+      //    mantém pitch=1 nas vozes realmente femininas (Maria, Luciana, Google pt-BR etc.)
+      pitchPadrao = vozEhFeminina ? 1 : 1.08;
+      const indiceF = vozF ? vozes.indexOf(vozF) : -1;
+      console.info('[narração] voz selecionada:', vozPt ? vozPt.name : 'padrão do sistema',
+                   vozEhFeminina ? '(feminina)' : '(tom ajustado)',
+                   vozF && indiceF > -1 ? `(índice ${indiceF})` : '');
+      vozPronta = true;
+    }
+    if (narracaoSuportada) {
+      carregarVozPt();
+      if ('addEventListener' in speechSynthesis) {
+        speechSynthesis.addEventListener('voiceschanged', carregarVozPt);
+      }
+      // Firefox/Safari podem devolver a lista de vozes vazia na primeira chamada: espera com retry
+      let tentativas = 0;
+      const aguardarVoz = setInterval(() => {
+        carregarVozPt();
+        tentativas += 1;
+        if (vozPronta || tentativas > 40) clearInterval(aguardarVoz); // até ~4s de espera
+      }, 100);
+    } else if (narracaoBtn) {
+      // navegador sem Web Speech (ex.: Firefox desktop): mantém a demo viva, comunica a indisponibilidade
+      narracaoBtn.classList.add('sem-voz');
+      narracaoBtn.disabled = true;
+      narracaoBtn.title = 'Narração por voz indisponível neste navegador — a demonstração segue normalmente';
+    }
+
+    function duracaoEstimada(index){
+      const texto = steps[index].title + '. ' + steps[index].desc;
+      return Math.max(steps[index].duration, 1600 + Math.round(texto.length * 68));
+    }
+
+    function _encerrarKeepAlive(){
+      if (_keepAliveToken) { clearInterval(_keepAliveToken); _keepAliveToken = null; }
+    }
+    function _manterFalaAtiva(){
+      // Chrome pausa a fala após ~15s: pause()+resume() periódicos mantêm a narração viva
+      _encerrarKeepAlive();
+      _keepAliveToken = setInterval(() => {
+        try {
+          if (speechSynthesis.speaking && !speechSynthesis.paused) {
+            speechSynthesis.pause();
+            speechSynthesis.resume();
+          }
+        } catch(e){}
+      }, 10000);
+    }
+    function limparFala(utter){
+      const i = _utterancesAtivos.indexOf(utter);
+      if (i > -1) _utterancesAtivos.splice(i, 1);
+      if (!_utterancesAtivos.length) { _encerrarKeepAlive(); }
+    }
+    function _pararFala(){
+      _falaAtiva = false;
+      _encerrarKeepAlive();
+      _utterancesAtivos.length = 0;
+      if (narracaoSuportada) { try { speechSynthesis.cancel(); } catch(e){} }
+    }
+    function avancarAposFala(){
+      clearTimer();
+      if (!playing) return;
+      // ao chegar ao último passo via reprodução automática: dispara a narração de encerramento
+      if (current >= steps.length - 1) {
+        narrarEncerramento();
+        return;
+      }
+      // respiração curta após o fim da frase: a última palavra soa completa, sem corte
+      timer = setTimeout(() => { goTo((current + 1) % steps.length); }, 450);
+    }
+
+    function finalizarDemo(){
+      // encerra a reprodução: nada mais auto-avança; o play precisa ser acionado para recomeçar
+      encerrado = true;
+      playing = false;
+      playBtn.textContent = '▶';
+      try { playBtn.setAttribute('aria-label', 'Reproduzir demonstração'); } catch(e){}
+      try { playBtn.title = 'Reproduzir demonstração do início'; } catch(e){}
+      clearTimer();
+      _encerrarKeepAlive();
+      _utterancesAtivos.length = 0;
+      if (narracaoSuportada) { try { speechSynthesis.cancel(); } catch(e){} }
+      _falaAtiva = false;
+    }
+
+    function narrarEncerramento(){
+      // narração final avisa que o play precisa ser acionado; a demo só é parada
+      // após o onend dessa mensagem (nunca antes, para garantir a leitura completa)
+      if (!narrando || !narracaoSuportada) {
+        finalizarDemo();
+        return;
+      }
+      _encerrarKeepAlive();
+      const texto = 'Demonstração concluída. Para recomeçar do início, pressione o botão de reprodução da animação.';
+      const utter = new SpeechSynthesisUtterance(texto);
+      utter.lang = 'pt-BR';
+      if (vozPt) utter.voice = vozPt;
+      utter.rate = 1;
+      utter.pitch = pitchPadrao;
+      utter.volume = 1;
+      utter.onstart = () => { _falaAtiva = true; };
+      utter.onend = () => { _falaAtiva = false; limparFala(utter); finalizarDemo(); };
+      utter.onerror = (ev) => {
+        limparFala(utter);
+        if (ev && ev.error && (ev.error === 'canceled' || ev.error === 'interrupted')) return;
+        _falaAtiva = false;
+        finalizarDemo();
+      };
+      _utterancesAtivos.push(utter);
+      setTimeout(() => {
+        if (_utterancesAtivos.indexOf(utter) === -1) return;
+        try {
+          if (speechSynthesis.speaking && !speechSynthesis.paused) {
+            speechSynthesis.pause();
+            speechSynthesis.resume();
+          }
+          speechSynthesis.speak(utter);
+          _manterFalaAtiva();
+        } catch(e){ _falaAtiva = false; finalizarDemo(); }
+      }, 120);
+    }
+
+    function falarPasso(index){
+      _pararFala();
+      if (!narrando || !narracaoSuportada) { _falaAtiva = false; return; }
+      const texto = steps[index].title + '. ' + steps[index].desc;
+      const utter = new SpeechSynthesisUtterance(texto);
+      utter.lang = 'pt-BR';
+      if (vozPt) utter.voice = vozPt;
+      utter.rate = 1;
+      utter.pitch = pitchPadrao;
+      utter.volume = 1;
+      utter.onstart = () => { _falaAtiva = true; };
+      utter.onend = () => { _falaAtiva = false; limparFala(utter); avancarAposFala(); };
+      utter.onerror = (ev) => {
+        limparFala(utter);
+        if (ev && ev.error && (ev.error === 'canceled' || ev.error === 'interrupted')) return;
+        // erro real (ex.: voz indisponível): segue o fluxo sem travar a demonstração
+        _falaAtiva = false;
+        avancarAposFala();
+      };
+      _utterancesAtivos.push(utter);
+      // pequeno atraso pós-cancel(): evita o "race" do Chrome/Edge que corta a primeira palavra
+      setTimeout(() => {
+        if (!narrando) return;
+        if (_utterancesAtivos.indexOf(utter) === -1) return;
+        try {
+          if (speechSynthesis.speaking && !speechSynthesis.paused) {
+            speechSynthesis.pause();
+            speechSynthesis.resume();
+          }
+          speechSynthesis.speak(utter);
+          _manterFalaAtiva();
+        } catch(e){ _falaAtiva = false; avancarAposFala(); }
+      }, 120);
+    }
+
+    if (narracaoBtn) {
+      narracaoBtn.addEventListener('click', ()=>{
+        narrando = !narrando;
+        narracaoBtn.classList.toggle('narrando', narrando);
+        narracaoBtn.textContent = narrando ? '🔊' : '🔈';
+        narracaoBtn.title = narrando ? 'Desativar narração por voz' : 'Ativar narração por voz';
+        if (narrando) {
+          falarPasso(current);
+          agendarProximo();
+        } else {
+          _pararFala();
+          clearTimer();
+          if (playing) agendarProximo();
+        }
+      });
+    }
+
+    const dotsWrap = $('#demo-dots');
+    steps.forEach((_, i)=>{
+      const d = document.createElement('span');
+      d.className = 'demo-dot' + (i === 0 ? ' active' : '');
+      d.addEventListener('click', ()=> goTo(i, true));
+      dotsWrap.appendChild(d);
+    });
+    const dotEls = $$('.demo-dot', dotsWrap);
+    const stepNum = $('#demo-step-num');
+    const stepTitle = $('#demo-step-title');
+    const stepDesc = $('#demo-step-desc');
+    const playBtn = $('#demo-play');
+
+    function resetVisuals(){
+      Object.values(els).forEach(node=>{
+        if(!node) return;
+        node.classList.remove('show','active');
+        if(node === els.cursor){ node.style.left=''; node.style.top=''; }
+        if(node === els.clickRing){ node.classList.remove('ping'); }
+      });
+      els.badgeStatus.textContent = 'Aguardando';
+      els.badgeStatus.className = 'badge-demo aguardando';
+      els.btnAssumir.textContent = 'Assumir';
+      els.seta1.style.opacity = '.5';
+      els.seta2.style.opacity = '.5';
+    }
+
+    function renderUpTo(index){
+      resetVisuals();
+      for(let i = 0; i <= index; i++){ steps[i].apply(); }
+    }
+
+    function updateCaption(index){
+      stepNum.textContent = index + 1;
+      stepTitle.textContent = steps[index].title;
+      stepDesc.textContent = steps[index].desc;
+      dotEls.forEach((d,i)=> d.classList.toggle('active', i === index));
+    }
+
+    function clearTimer(){ if(timer){ clearTimeout(timer); timer = null; } }
+    function agendarProximo(){
+      clearTimer();
+      if(!playing) return;
+      if (narrando && narracaoSuportada) {
+        // com voz: o avanço é disparado pelo fim da narração (onend) — o timer é só rede de segurança
+        const estimado = duracaoEstimada(current) + 2500;
+        timer = setTimeout(() => {
+          if (_falaAtiva) { _pararFala(); goTo((current + 1) % steps.length); }
+          else if (current >= steps.length - 1) { narrarEncerramento(); }
+        }, estimado);
+      } else {
+        // sem voz (narração desligada ou navegador sem Web Speech): ritmo padrão original
+        timer = setTimeout(() => {
+          if (current >= steps.length - 1) { finalizarDemo(); }
+          else { goTo((current + 1) % steps.length); }
+        }, steps[current].duration);
+      }
+    }
+
+    function goTo(index, userTriggered){
+      current = index;
+      renderUpTo(current);
+      updateCaption(current);
+      falarPasso(current);
+      if(userTriggered){ playing = true; playBtn.textContent = '⏸'; }
+      agendarProximo();
+    }
+
+    $('#demo-play').addEventListener('click', ()=>{
+      // ao final da sequência: o play reseta a demo do passo 1
+      if (encerrado) {
+        encerrado = false;
+        playing = true;
+        playBtn.textContent = '⏸';
+        try { playBtn.setAttribute('aria-label', 'Pausar demonstração'); } catch(e){}
+        try { playBtn.title = 'Pausar/reproduzir'; } catch(e){}
+        goTo(0, true);
+        return;
+      }
+      playing = !playing;
+      playBtn.textContent = playing ? '⏸' : '▶';
+      if(playing){
+        if (narrando) falarPasso(current);
+        agendarProximo();
+      } else {
+        clearTimer();
+        _pararFala();
+      }
+    });
+    $('#demo-next').addEventListener('click', ()=> goTo((current + 1) % steps.length, true));
+    $('#demo-prev').addEventListener('click', ()=> goTo((current - 1 + steps.length) % steps.length, true));
+    $('#demo-restart').addEventListener('click', ()=> goTo(0, true));
+
+    // pausa automaticamente quando o player sai da tela, retoma ao voltar
+    if('IntersectionObserver' in window){
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if(!entry.isIntersecting){ clearTimer(); _pararFala(); }
+          else if(playing && !encerrado){
+            if (narrando) falarPasso(current);
+            agendarProximo();
+          }
+        });
+      }, {threshold:.25});
+      io.observe(stage);
+    }
+
+    goTo(0);
+  }
+})();
+</script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Manual de Uso — Sistema de Atendimento Técnico | GRUPO LABMEDIC</title>
+<meta name="description" content="Tutorial completo do Call Center GRUPO LABMEDIC: fluxos por nível de acesso, vantagens e boas práticas." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F3F6F8;
+    --surface:#FFFFFF;
+    --sidebar-bg:#0B1420;
+    --sidebar-bg-2:#101D2E;
+    --sidebar-text:#9FB2C6;
+    --sidebar-text-active:#FFFFFF;
+    --primary:#0F6E63;
+    --primary-dark:#0B5148;
+    --primary-light:#E5F3F1;
+    --whatsapp:#25D366;
+    --text:#16212E;
+    --text-muted:#63748A;
+    --border:#E1E7ED;
+    --danger:#D33636;
+    --danger-light:#FBEAEA;
+    --warning:#C97A0E;
+    --warning-light:#FBF1E1;
+    --info:#2563A8;
+    --info-light:#E9F1FB;
+    --radius:14px;
+    --radius-sm:9px;
+    --shadow:0 1px 2px rgba(16,29,46,.06), 0 8px 24px -12px rgba(16,29,46,.16);
+    --tecnico:#2563A8;
+    --tecnico-light:#E9F1FB;
+    --supervisor:#0F6E63;
+    --supervisor-light:#E5F3F1;
+    --admin:#8A4B12;
+    --admin-light:#FBF0E1;
+  }
+  [data-theme="dark"]{
+    --bg:#0C1119;
+    --surface:#141B26;
+    --sidebar-bg:#070B12;
+    --sidebar-bg-2:#0B121C;
+    --sidebar-text:#8394A8;
+    --primary:#17B39F;
+    --primary-dark:#0F8A79;
+    --primary-light:#12332F;
+    --text:#E7EDF3;
+    --text-muted:#8B9AAD;
+    --border:#232E3D;
+    --danger:#FF6B6B;
+    --danger-light:#3A1D1D;
+    --warning:#F5A623;
+    --warning-light:#3A2E15;
+    --info:#4A9EFF;
+    --info-light:#152A3D;
+    --shadow:0 1px 2px rgba(0,0,0,.35), 0 8px 24px -12px rgba(0,0,0,.55);
+    --tecnico:#4A9EFF; --tecnico-light:#152A3D;
+    --supervisor:#17B39F; --supervisor-light:#12332F;
+    --admin:#F5A623; --admin-light:#3A2E15;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    -webkit-font-smoothing:antialiased;
+    transition:background-color .15s, color .15s;
+  }
+  h1,h2,h3,h4{font-family:'Sora',system-ui,sans-serif;margin:0;color:var(--text);letter-spacing:-.01em;}
+  p{margin:0;}
+  a{color:inherit;}
+  code, .mono{font-family:'JetBrains Mono',monospace;}
+  ::selection{background:var(--primary);color:#fff;}
+
+  /* ---------- barra de progresso de leitura ---------- */
+  #progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--primary);width:0%;z-index:200;transition:width .1s linear;}
+
+  /* ---------- topo utilitário ---------- */
+  .util-bar{position:fixed;top:10px;right:14px;z-index:150;display:flex;gap:8px;}
+  .util-btn{
+    width:38px;height:38px;border-radius:50%;border:1px solid var(--border);
+    background:var(--surface);color:var(--text);display:flex;align-items:center;justify-content:center;
+    cursor:pointer;font-size:16px;box-shadow:var(--shadow);
+  }
+  .util-btn:hover{border-color:var(--primary);}
+
+  /* ---------- layout geral ---------- */
+  .shell{display:flex;max-width:1440px;margin:0 auto;min-height:100vh;}
+  .toc{
+    width:270px;flex:0 0 270px;background:var(--sidebar-bg);color:var(--sidebar-text);
+    position:sticky;top:0;height:100vh;overflow-y:auto;padding:26px 18px 30px;
+  }
+  .toc::-webkit-scrollbar{width:6px;}
+  .toc::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:6px;}
+  .toc-brand{display:flex;align-items:center;gap:9px;padding:0 6px 20px;margin-bottom:18px;border-bottom:1px solid rgba(255,255,255,.08);}
+  .toc-brand .dot{width:9px;height:9px;border-radius:50%;background:var(--primary);flex:0 0 9px;box-shadow:0 0 0 3px rgba(15,110,99,.28);}
+  .toc-brand strong{color:#fff;font-family:'Sora';font-size:14px;letter-spacing:.02em;}
+  .toc-brand span{display:block;font-size:10.5px;color:var(--sidebar-text);margin-top:1px;}
+  .toc-group-label{font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:#5C728A;padding:16px 8px 6px;font-weight:700;}
+  .toc-group-label:first-of-type{padding-top:0;}
+  .toc a{
+    display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:8px;
+    font-size:13px;color:var(--sidebar-text);text-decoration:none;font-weight:500;
+    border-left:2px solid transparent;transition:background .12s,color .12s;
+  }
+  .toc a .ic{font-size:13px;flex:0 0 16px;text-align:center;opacity:.85;}
+  .toc a:hover{background:rgba(255,255,255,.06);color:#fff;}
+  .toc a.active{background:rgba(23,179,159,.14);color:#fff;border-left-color:var(--primary);}
+  .toc-tag{margin-left:auto;font-size:9.5px;padding:1px 6px;border-radius:20px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;}
+  .tag-tecnico{background:var(--tecnico-light);color:var(--tecnico);}
+  .tag-supervisor{background:var(--supervisor-light);color:var(--supervisor);}
+  .tag-admin{background:var(--admin-light);color:var(--admin);}
+
+  .main{flex:1;min-width:0;padding:0 0 90px;}
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding:74px 64px 56px;background:
+      radial-gradient(1100px 480px at 85% -10%, rgba(15,110,99,.16), transparent 60%),
+      linear-gradient(180deg, var(--sidebar-bg-2), var(--sidebar-bg));
+    color:#fff;position:relative;overflow:hidden;
+  }
+  .hero-eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;font-weight:700;letter-spacing:.06em;color:#8FE0D3;background:rgba(23,179,159,.14);border:1px solid rgba(23,179,159,.32);padding:6px 12px;border-radius:20px;margin-bottom:22px;}
+  .hero h1{font-size:38px;line-height:1.16;color:#fff;max-width:780px;font-weight:700;}
+  .hero h1 em{font-style:normal;color:#4FD9C4;}
+  .hero p.lead{margin-top:16px;font-size:15.5px;line-height:1.65;color:#B9C8D8;max-width:640px;}
+  .hero-stats{display:flex;gap:34px;margin-top:38px;flex-wrap:wrap;}
+  .hero-stat strong{display:block;font-family:'Sora';font-size:24px;color:#fff;}
+  .hero-stat span{font-size:12px;color:#8CA0B6;}
+
+  /* ---------- conteúdo ---------- */
+  .section{padding:56px 64px;border-bottom:1px solid var(--border);scroll-margin-top:20px;}
+  .anchor-offset{display:block;position:relative;visibility:hidden;height:0;}
+  [id]{scroll-margin-top:20px;}
+  .section-kicker{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--primary);margin-bottom:10px;}
+  .section h2{font-size:27px;max-width:680px;}
+  .section > p.intro{margin-top:12px;font-size:14.5px;line-height:1.7;color:var(--text-muted);max-width:680px;}
+
+  .grid{display:grid;gap:16px;}
+  .grid-2{grid-template-columns:repeat(2,1fr);}
+  .grid-3{grid-template-columns:repeat(3,1fr);}
+  .grid-4{grid-template-columns:repeat(4,1fr);}
+  @media (max-width:980px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr;}}
+
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow);}
+  .card h3{font-size:15.5px;margin-bottom:8px;}
+  .card h3 .ic{margin-right:8px;}
+  .card p{font-size:13.3px;line-height:1.62;color:var(--text-muted);}
+
+  /* ---------- conceito chips ---------- */
+  .concept-card{display:flex;gap:14px;align-items:flex-start;}
+  .concept-ic{width:40px;height:40px;flex:0 0 40px;border-radius:10px;background:var(--primary-light);color:var(--primary-dark);display:flex;align-items:center;justify-content:center;font-size:18px;}
+
+  /* ---------- diagrama de fluxo ---------- */
+  .flow{display:flex;align-items:stretch;gap:0;overflow-x:auto;padding:6px 2px 14px;}
+  .flow-step{
+    flex:1 1 0;min-width:168px;background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius-sm);padding:16px 15px;position:relative;
+  }
+  .flow-step .num{
+    width:24px;height:24px;border-radius:50%;background:var(--primary);color:#fff;font-size:12px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;margin-bottom:10px;font-family:'Sora';
+  }
+  .flow-step h4{font-size:13px;margin-bottom:5px;}
+  .flow-step p{font-size:12px;color:var(--text-muted);line-height:1.5;}
+  .flow-arrow{flex:0 0 26px;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:16px;}
+  @media (max-width:980px){.flow{flex-direction:column;} .flow-arrow{transform:rotate(90deg);padding:2px 0;}}
+
+  /* ---------- abas de papéis ---------- */
+  .role-tabs{display:flex;gap:8px;margin:26px 0 26px;flex-wrap:wrap;}
+  .role-tab{
+    display:flex;align-items:center;gap:9px;padding:11px 18px;border-radius:11px;border:1.5px solid var(--border);
+    background:var(--surface);cursor:pointer;font-weight:600;font-size:13.5px;color:var(--text-muted);
+    transition:border-color .12s,color .12s,background .12s;
+  }
+  .role-tab .role-dot{width:9px;height:9px;border-radius:50%;}
+  .role-tab.active{color:#fff;border-color:transparent;}
+  .role-tab[data-role="tecnico"].active{background:var(--tecnico);}
+  .role-tab[data-role="supervisor"].active{background:var(--supervisor);}
+  .role-tab[data-role="admin"].active{background:var(--admin);}
+  .role-tab:not(.active):hover{border-color:var(--text-muted);}
+
+  .role-panel{display:none;}
+  .role-panel.active{display:block;animation:fadein .25s ease;}
+  @keyframes fadein{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+
+  .role-intro{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:var(--radius-sm);margin-bottom:22px;border:1px solid;}
+  .role-intro.tecnico{background:var(--tecnico-light);border-color:var(--tecnico);}
+  .role-intro.supervisor{background:var(--supervisor-light);border-color:var(--supervisor);}
+  .role-intro.admin{background:var(--admin-light);border-color:var(--admin);}
+  .role-intro p{font-size:13.3px;line-height:1.6;color:var(--text);}
+  .role-intro strong{display:block;font-family:'Sora';font-size:14.5px;margin-bottom:4px;}
+
+  /* ---------- acordeão de funcionalidades ---------- */
+  .feat{border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:10px;overflow:hidden;background:var(--surface);}
+  .feat-head{display:flex;align-items:center;gap:12px;padding:15px 18px;cursor:pointer;user-select:none;}
+  .feat-head .ic{font-size:17px;flex:0 0 20px;}
+  .feat-head .ttl{flex:1;font-weight:600;font-size:14px;}
+  .feat-head .chev{color:var(--text-muted);transition:transform .18s;font-size:12px;}
+  .feat.open .chev{transform:rotate(180deg);}
+  .feat-head:hover{background:var(--bg);}
+  .feat-body{max-height:0;overflow:hidden;transition:max-height .25s ease;}
+  .feat.open .feat-body{max-height:900px;}
+  .feat-body-inner{padding:0 18px 18px 50px;}
+  .feat-body-inner p.desc{font-size:13px;color:var(--text-muted);line-height:1.6;margin-bottom:10px;}
+  .steps{list-style:none;margin:0;padding:0;counter-reset:step;}
+  .steps li{counter-increment:step;position:relative;padding:0 0 12px 28px;font-size:13px;line-height:1.55;color:var(--text);}
+  .steps li:last-child{padding-bottom:0;}
+  .steps li::before{
+    content:counter(step);position:absolute;left:0;top:-1px;width:19px;height:19px;border-radius:50%;
+    background:var(--primary-light);color:var(--primary-dark);font-size:10.5px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;font-family:'Sora';
+  }
+  .tip{display:flex;gap:8px;background:var(--info-light);color:var(--info);border-radius:8px;padding:9px 12px;font-size:12.3px;line-height:1.5;margin-top:10px;}
+  .tip b{color:inherit;}
+  .warn{display:flex;gap:8px;background:var(--warning-light);color:var(--warning);border-radius:8px;padding:9px 12px;font-size:12.3px;line-height:1.5;margin-top:10px;}
+
+  /* ---------- vantagens ---------- */
+  .adv-card .adv-num{font-family:'Sora';font-size:12px;color:var(--primary);font-weight:700;margin-bottom:8px;}
+
+  /* ---------- demonstração animada (simulação, não é gravação real) ---------- */
+  .demo-note{display:flex;gap:8px;align-items:flex-start;background:var(--info-light);color:var(--info);border-radius:8px;padding:10px 13px;font-size:12.3px;line-height:1.55;margin-bottom:20px;}
+  .demo-player{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px 26px 20px;}
+  .demo-stage{display:flex;gap:26px;align-items:flex-start;min-height:340px;}
   @media (max-width:860px){.demo-stage{flex-direction:column;align-items:center;}}
 
   /* telefone (lado cliente) */
