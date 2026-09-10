@@ -295,6 +295,9 @@
   .demo-dots{display:flex;gap:6px;flex:1;justify-content:center;}
   .demo-dot{width:7px;height:7px;border-radius:50%;background:var(--border);cursor:pointer;transition:background .2s,transform .2s;}
   .demo-dot.active{background:var(--primary);transform:scale(1.3);}
+  .demo-btn.narrando{background:var(--primary);color:#fff;border-color:transparent;}
+  .demo-btn.narrando:hover{color:#fff;}
+  .demo-controls-sep{width:1px;height:22px;background:var(--border);margin:0 2px;}
 
   /* ---------- faq ---------- */
   .faq-item{border-bottom:1px solid var(--border);padding:16px 0;}
@@ -496,6 +499,8 @@
           <button class="demo-btn" id="demo-prev" title="Passo anterior" aria-label="Passo anterior">◀</button>
           <button class="demo-btn demo-play" id="demo-play" title="Pausar/reproduzir" aria-label="Pausar ou reproduzir">⏸</button>
           <button class="demo-btn" id="demo-next" title="Próximo passo" aria-label="Próximo passo">▶</button>
+          <div class="demo-controls-sep"></div>
+          <button class="demo-btn" id="demo-narracao" title="Ativar narração por voz" aria-label="Ativar ou desativar narração por voz">🔈</button>
           <div class="demo-dots" id="demo-dots"></div>
         </div>
       </div>
@@ -979,6 +984,45 @@
     let playing = true;
     let timer = null;
 
+    /* ---------- narração por voz (Web Speech API) ---------- */
+    const narracaoSuportada = 'speechSynthesis' in window;
+    const narracaoBtn = $('#demo-narracao');
+    let narrando = false;
+    let vozPt = null;
+
+    function carregarVozPt(){
+      const vozes = speechSynthesis.getVoices();
+      vozPt = vozes.find(v => /pt-BR/i.test(v.lang)) || vozes.find(v => /^pt/i.test(v.lang)) || null;
+    }
+    if (narracaoSuportada) {
+      carregarVozPt();
+      speechSynthesis.addEventListener('voiceschanged', carregarVozPt);
+    } else if (narracaoBtn) {
+      narracaoBtn.style.display = 'none';
+    }
+
+    function falarPasso(index){
+      if (!narracaoSuportada || !narrando) return;
+      speechSynthesis.cancel();
+      const texto = steps[index].title + '. ' + steps[index].desc;
+      const utter = new SpeechSynthesisUtterance(texto);
+      utter.lang = 'pt-BR';
+      if (vozPt) utter.voice = vozPt;
+      utter.rate = 1;
+      utter.pitch = 1;
+      speechSynthesis.speak(utter);
+    }
+
+    if (narracaoBtn) {
+      narracaoBtn.addEventListener('click', ()=>{
+        narrando = !narrando;
+        narracaoBtn.classList.toggle('narrando', narrando);
+        narracaoBtn.textContent = narrando ? '🔊' : '🔈';
+        narracaoBtn.title = narrando ? 'Desativar narração por voz' : 'Ativar narração por voz';
+        if (narrando) { falarPasso(current); } else { speechSynthesis.cancel(); }
+      });
+    }
+
     const dotsWrap = $('#demo-dots');
     steps.forEach((_, i)=>{
       const d = document.createElement('span');
@@ -1023,15 +1067,17 @@
     function scheduleNext(){
       clearTimer();
       if(!playing) return;
+      const duracaoExtra = narrando ? 2400 : 0;
       timer = setTimeout(()=>{
         goTo((current + 1) % steps.length);
-      }, steps[current].duration);
+      }, steps[current].duration + duracaoExtra);
     }
 
     function goTo(index, userTriggered){
       current = index;
       renderUpTo(current);
       updateCaption(current);
+      falarPasso(current);
       if(userTriggered){ playing = true; playBtn.textContent = '⏸'; }
       scheduleNext();
     }
@@ -1039,7 +1085,7 @@
     $('#demo-play').addEventListener('click', ()=>{
       playing = !playing;
       playBtn.textContent = playing ? '⏸' : '▶';
-      if(playing){ scheduleNext(); } else { clearTimer(); }
+      if(playing){ scheduleNext(); } else { clearTimer(); if(narracaoSuportada) speechSynthesis.cancel(); }
     });
     $('#demo-next').addEventListener('click', ()=> goTo((current + 1) % steps.length, true));
     $('#demo-prev').addEventListener('click', ()=> goTo((current - 1 + steps.length) % steps.length, true));
@@ -1049,7 +1095,7 @@
     if('IntersectionObserver' in window){
       const io = new IntersectionObserver((entries)=>{
         entries.forEach(entry=>{
-          if(!entry.isIntersecting){ clearTimer(); }
+          if(!entry.isIntersecting){ clearTimer(); if(narracaoSuportada) speechSynthesis.cancel(); }
           else if(playing){ scheduleNext(); }
         });
       }, {threshold:.25});
