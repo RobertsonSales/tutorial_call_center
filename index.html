@@ -297,6 +297,7 @@
   .demo-dot.active{background:var(--primary);transform:scale(1.3);}
   .demo-btn.narrando{background:var(--primary);color:#fff;border-color:transparent;}
   .demo-btn.narrando:hover{color:#fff;}
+  .demo-btn.sem-voz{opacity:.5;cursor:not-allowed;}
   .demo-controls-sep{width:1px;height:22px;background:var(--border);margin:0 2px;}
 
   /* ---------- faq ---------- */
@@ -984,33 +985,117 @@
     let playing = true;
     let timer = null;
 
-    /* ---------- narração por voz (Web Speech API) ---------- */
+    /* ---------- narração por voz (Web Speech API, com suporte multi-navegador) ---------- */
     const narracaoSuportada = 'speechSynthesis' in window;
     const narracaoBtn = $('#demo-narracao');
     let narrando = false;
     let vozPt = null;
+    let vozPronta = false;
+    let _falaAtiva = false;
+    let _keepAliveToken = null;
+    const _utterancesAtivos = []; // referência em escopo de módulo: impede o GC de cortar a fala no meio
 
     function carregarVozPt(){
-      const vozes = speechSynthesis.getVoices();
-      vozPt = vozes.find(v => /pt-BR/i.test(v.lang)) || vozes.find(v => /^pt/i.test(v.lang)) || null;
+      if (!narracaoSuportada) return;
+      let vozes = [];
+      try { vozes = speechSynthesis.getVoices() || []; } catch(e){ vozes = []; }
+      if (!vozes.length) return;
+      const escolhida = vozes.find(v => /pt[-_]BR/i.test(v.lang || ''))
+                     || vozes.find(v => /^pt/i.test(v.lang || ''))
+                     || null;
+      vozPt = escolhida || vozPt;
+      vozPronta = true;
     }
     if (narracaoSuportada) {
       carregarVozPt();
-      speechSynthesis.addEventListener('voiceschanged', carregarVozPt);
+      if ('addEventListener' in speechSynthesis) {
+        speechSynthesis.addEventListener('voiceschanged', carregarVozPt);
+      }
+      // Firefox/Safari podem devolver a lista de vozes vazia na primeira chamada: espera com retry
+      let tentativas = 0;
+      const aguardarVoz = setInterval(() => {
+        carregarVozPt();
+        tentativas += 1;
+        if (vozPronta || tentativas > 40) clearInterval(aguardarVoz); // até ~4s de espera
+      }, 100);
     } else if (narracaoBtn) {
-      narracaoBtn.style.display = 'none';
+      // navegador sem Web Speech (ex.: Firefox desktop): mantém a demo viva, comunica a indisponibilidade
+      narracaoBtn.classList.add('sem-voz');
+      narracaoBtn.disabled = true;
+      narracaoBtn.title = 'Narração por voz indisponível neste navegador — a demonstração segue normalmente';
+    }
+
+    function duracaoEstimada(index){
+      const texto = steps[index].title + '. ' + steps[index].desc;
+      return Math.max(steps[index].duration, 1600 + Math.round(texto.length * 68));
+    }
+
+    function _encerrarKeepAlive(){
+      if (_keepAliveToken) { clearInterval(_keepAliveToken); _keepAliveToken = null; }
+    }
+    function _manterFalaAtiva(){
+      // Chrome pausa a fala após ~15s: pause()+resume() periódicos mantêm a narração viva
+      _encerrarKeepAlive();
+      _keepAliveToken = setInterval(() => {
+        try {
+          if (speechSynthesis.speaking && !speechSynthesis.paused) {
+            speechSynthesis.pause();
+            speechSynthesis.resume();
+          }
+        } catch(e){}
+      }, 10000);
+    }
+    function limparFala(utter){
+      const i = _utterancesAtivos.indexOf(utter);
+      if (i > -1) _utterancesAtivos.splice(i, 1);
+      if (!_utterancesAtivos.length) { _encerrarKeepAlive(); }
+    }
+    function _pararFala(){
+      _falaAtiva = false;
+      _encerrarKeepAlive();
+      _utterancesAtivos.length = 0;
+      if (narracaoSuportada) { try { speechSynthesis.cancel(); } catch(e){} }
+    }
+    function avancarAposFala(){
+      clearTimer();
+      if (!playing) return;
+      // respiração curta após o fim da frase: a última palavra soa completa, sem corte
+      timer = setTimeout(() => { goTo((current + 1) % steps.length); }, 450);
     }
 
     function falarPasso(index){
-      if (!narracaoSuportada || !narrando) return;
-      speechSynthesis.cancel();
+      _pararFala();
+      if (!narrando || !narracaoSuportada) { _falaAtiva = false; return; }
       const texto = steps[index].title + '. ' + steps[index].desc;
       const utter = new SpeechSynthesisUtterance(texto);
       utter.lang = 'pt-BR';
       if (vozPt) utter.voice = vozPt;
       utter.rate = 1;
       utter.pitch = 1;
-      speechSynthesis.speak(utter);
+      utter.volume = 1;
+      utter.onstart = () => { _falaAtiva = true; };
+      utter.onend = () => { _falaAtiva = false; limparFala(utter); avancarAposFala(); };
+      utter.onerror = (ev) => {
+        limparFala(utter);
+        if (ev && ev.error && (ev.error === 'canceled' || ev.error === 'interrupted')) return;
+        // erro real (ex.: voz indisponível): segue o fluxo sem travar a demonstração
+        _falaAtiva = false;
+        avancarAposFala();
+      };
+      _utterancesAtivos.push(utter);
+      // pequeno atraso pós-cancel(): evita o "race" do Chrome/Edge que corta a primeira palavra
+      setTimeout(() => {
+        if (!narrando) return;
+        if (_utterancesAtivos.indexOf(utter) === -1) return;
+        try {
+          if (speechSynthesis.speaking && !speechSynthesis.paused) {
+            speechSynthesis.pause();
+            speechSynthesis.resume();
+          }
+          speechSynthesis.speak(utter);
+          _manterFalaAtiva();
+        } catch(e){ _falaAtiva = false; avancarAposFala(); }
+      }, 120);
     }
 
     if (narracaoBtn) {
@@ -1019,7 +1104,14 @@
         narracaoBtn.classList.toggle('narrando', narrando);
         narracaoBtn.textContent = narrando ? '🔊' : '🔈';
         narracaoBtn.title = narrando ? 'Desativar narração por voz' : 'Ativar narração por voz';
-        if (narrando) { falarPasso(current); } else { speechSynthesis.cancel(); }
+        if (narrando) {
+          falarPasso(current);
+          agendarProximo();
+        } else {
+          _pararFala();
+          clearTimer();
+          if (playing) agendarProximo();
+        }
       });
     }
 
@@ -1063,14 +1155,19 @@
     }
 
     function clearTimer(){ if(timer){ clearTimeout(timer); timer = null; } }
-
-    function scheduleNext(){
+    function agendarProximo(){
       clearTimer();
       if(!playing) return;
-      const duracaoExtra = narrando ? 2400 : 0;
-      timer = setTimeout(()=>{
-        goTo((current + 1) % steps.length);
-      }, steps[current].duration + duracaoExtra);
+      if (narrando && narracaoSuportada) {
+        // com voz: o avanço é disparado pelo fim da narração (onend) — o timer é só rede de segurança
+        const estimado = duracaoEstimada(current) + 2500;
+        timer = setTimeout(() => {
+          if (_falaAtiva) { _pararFala(); goTo((current + 1) % steps.length); }
+        }, estimado);
+      } else {
+        // sem voz (narração desligada ou navegador sem Web Speech): ritmo padrão original
+        timer = setTimeout(() => { goTo((current + 1) % steps.length); }, steps[current].duration);
+      }
     }
 
     function goTo(index, userTriggered){
@@ -1079,13 +1176,19 @@
       updateCaption(current);
       falarPasso(current);
       if(userTriggered){ playing = true; playBtn.textContent = '⏸'; }
-      scheduleNext();
+      agendarProximo();
     }
 
     $('#demo-play').addEventListener('click', ()=>{
       playing = !playing;
       playBtn.textContent = playing ? '⏸' : '▶';
-      if(playing){ scheduleNext(); } else { clearTimer(); if(narracaoSuportada) speechSynthesis.cancel(); }
+      if(playing){
+        if (narrando) falarPasso(current);
+        agendarProximo();
+      } else {
+        clearTimer();
+        _pararFala();
+      }
     });
     $('#demo-next').addEventListener('click', ()=> goTo((current + 1) % steps.length, true));
     $('#demo-prev').addEventListener('click', ()=> goTo((current - 1 + steps.length) % steps.length, true));
@@ -1095,8 +1198,8 @@
     if('IntersectionObserver' in window){
       const io = new IntersectionObserver((entries)=>{
         entries.forEach(entry=>{
-          if(!entry.isIntersecting){ clearTimer(); if(narracaoSuportada) speechSynthesis.cancel(); }
-          else if(playing){ scheduleNext(); }
+          if(!entry.isIntersecting){ clearTimer(); _pararFala(); }
+          else if(playing){ if (narrando) falarPasso(current); agendarProximo(); }
         });
       }, {threshold:.25});
       io.observe(stage);
@@ -1106,5 +1209,6 @@
   }
 })();
 </script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","spa":2}' crossorigin="anonymous"></script>
 </body>
 </html>
