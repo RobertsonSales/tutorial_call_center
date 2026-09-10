@@ -428,11 +428,10 @@
 
     <!-- ===================== DEMONSTRAÇÃO ANIMADA ===================== -->
     <section class="section" id="demo-animada">
-      <p class="section-kicker">Veja em movimento</p>
-      <h2>Demonstração animada: da mensagem do cliente ao início do suporte</h2>
-      <p class="intro">Uma simulação visual dos 5 primeiros passos do fluxo — desde a mensagem chegar pelo WhatsApp até o técnico assumir o protocolo e abrir a conversa.</p>
+     
+      <h2>Da mensagem do cliente ao início do suporte</h2>  
 
-      <div class="demo-note">ℹ️ <span><b>Isto é uma simulação ilustrativa</b> (não é uma gravação da aplicação real) — construída para explicar a sequência de telas e ações. Os nomes, números e mensagens são fictícios.</span></div>
+      <div class="demo-note">ℹ️ <span><b>Isto é uma simulação ilustrativa</b> construída para explicar a sequência de telas e ações - Veja as ações em movimento</span></div> 
 
       <div class="demo-player">
         <div class="demo-stage" id="demo-stage">
@@ -910,7 +909,7 @@
 
     const steps = [
       {
-        title: 'Cliente envia mensagem pelo WhatsApp',
+        title: 'Cliente envia a mensagem pelo WhatsApp',
         desc: 'A conversa chega numa das linhas cadastradas no sistema.',
         duration: 3600,
         apply(){
@@ -918,7 +917,7 @@
         }
       },
       {
-        title: 'Sistema gera o protocolo automaticamente',
+        title: 'O Sistema gera o protocolo automaticamente',
         desc: 'Um número de protocolo único é criado para essa conversa.',
         duration: 3200,
         apply(){
@@ -927,8 +926,8 @@
         }
       },
       {
-        title: 'A solicitação entra na Caixa de Entrada',
-        desc: '"Não assumidos": qualquer técnico disponível pode ver e assumir.',
+        title: 'A solicitação segue para a Caixa de Entrada da aplicação',
+        desc: '"Atendimentos Não assumidos": qualquer técnico disponível pode ver e assumir.',
         duration: 3400,
         apply(){
           els.seta2.style.opacity = '.5';
@@ -938,7 +937,7 @@
       },
       {
         title: 'Um técnico assume o atendimento',
-        desc: 'Ao clicar em "Assumir", o caso passa a ser dele.',
+        desc: 'Ao clicar em "Assumir", o suporte fica vinculado a ele.',
         duration: 3600,
         apply(){
           // move cursor até o botão "Assumir" e simula o clique
