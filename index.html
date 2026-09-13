@@ -239,6 +239,9 @@
   .demo-bubble.in{background:var(--surface);color:var(--text);align-self:flex-start;border-bottom-left-radius:3px;box-shadow:0 1px 2px rgba(0,0,0,.08);}
   .demo-bubble.out{background:var(--primary);color:#fff;align-self:flex-end;border-bottom-right-radius:3px;}
   .demo-bubble.show{opacity:1;transform:translateY(0) scale(1);}
+  .demo-bubble.menu{display:flex;flex-direction:column;gap:4px;}
+  .demo-bubble.menu b{font-weight:600;}
+  .demo-menu-opcao{background:rgba(255,255,255,.18);border-radius:6px;padding:3px 6px;font-size:10px;}
   .demo-typing{align-self:flex-start;display:flex;gap:3px;padding:7px 9px;background:var(--surface);border-radius:10px;border-bottom-left-radius:3px;opacity:0;transition:opacity .3s ease;}
   .demo-typing.show{opacity:1;}
   .demo-typing i{width:5px;height:5px;border-radius:50%;background:var(--text-muted);animation:demoBlink 1s infinite ease-in-out;}
@@ -371,7 +374,7 @@
 
     <!-- HERO -->
     <header class="hero" id="inicio">
-      <span class="hero-eyebrow">📘 Manual de uso · v12</span>
+      <span class="hero-eyebrow">📘 Manual de uso · v13</span>
       <h1>Sistema de Atendimento Técnico do <em>GRUPO LABMEDIC</em></h1>
       <p class="lead">Central de suporte via WhatsApp para equipamentos laboratoriais hospitalares: cada chamado vira um protocolo rastreável, do primeiro contato ao encerramento, com indicadores de gestão para quem supervisiona a operação.</p>
       <div class="hero-stats">
@@ -414,7 +417,7 @@
       <div class="flow" style="margin-top:28px;">
         <div class="flow-step"><div class="num">1</div><h4>Chamado chega</h4><p>Cliente manda mensagem numa Linha, ou o próprio agente registra o contato (telefone/presencial).</p></div>
         <div class="flow-arrow">→</div>
-        <div class="flow-step"><div class="num">2</div><h4>Protocolo gerado</h4><p>Sistema cria o número do protocolo e monta a mensagem inicial pronta para envio.</p></div>
+        <div class="flow-step"><div class="num">2</div><h4>Protocolo gerado</h4><p>Sistema cria o número do protocolo, monta a mensagem inicial e, em contatos novos, já envia um menu de triagem para o cliente classificar o assunto.</p></div>
         <div class="flow-arrow">→</div>
         <div class="flow-step"><div class="num">3</div><h4>Atendimento assumido</h4><p>Um técnico assume o caso — sozinho, se já o criou, ou pela Caixa de Entrada, se veio direto da API.</p></div>
         <div class="flow-arrow">→</div>
@@ -442,6 +445,7 @@
               <div class="demo-phone-header"><span class="av">🏥</span> Suporte Técnico — RJ</div>
               <div class="demo-phone-chat" id="demo-chat-cliente">
                 <div class="demo-bubble in" data-el="msg-cliente">Bom dia! O analisador X200 não liga depois de uma queda de energia 🙁</div>
+                <div class="demo-bubble out menu" data-el="msg-triagem"><b>🔘 Para agilizar, qual assunto representa melhor seu contato?</b><span class="demo-menu-opcao">🔧 Equipamento com problema</span><span class="demo-menu-opcao">🧪 Consumíveis / insumos</span><span class="demo-menu-opcao">📊 Volume de testes</span></div>
                 <div class="demo-typing" data-el="digitando-tecnico"><i></i><i></i><i></i></div>
                 <div class="demo-bubble out" data-el="msg-tecnico">Olá! Aqui é o suporte do Grupo Labmedic. Já abri seu protocolo e já te ajudo — pode confirmar se a luz do painel acende?</div>
               </div>
@@ -549,7 +553,7 @@
               <li>Informe o <b>WhatsApp do cliente</b>, o <b>Equipamento</b> (também com busca no catálogo) e a <b>descrição do problema</b>.</li>
               <li>Opcionalmente, adicione um <b>procedimento sugerido</b> e outras <b>observações do cliente</b> — acompanhe a prévia da mensagem à direita.</li>
               <li>Clique em <b>Gerar protocolo</b>. O número do protocolo aparece na tela e o botão <b>📱 Abrir WhatsApp e enviar ao cliente</b> já leva a mensagem pronta.</li>
-              <li>Se quiser complementar antes de enviar, use <b>🎤 Áudio</b> ou <b>🎥 Vídeo</b> (linhas em modo API) ou <b>📹 Anexar vídeo</b> já gravado.</li>
+              <li>Se quiser complementar antes de enviar, use <b>🎤 Áudio</b>, <b>🎥 Vídeo</b> ou <b>📄 Documento</b> (linhas em modo API) ou <b>📹 Anexar vídeo</b> já gravado. Áudio grava até 5 minutos, vídeo até 1 minuto (a gravação para sozinha ao chegar no limite) e documentos aceitam até 15MB.</li>
             </ol>
             <div class="tip">💡 <span>O protocolo já nasce registrado como seu — você o encontrará em <b>Atendimentos Ativos</b> assim que sair desta tela.</span></div>
           </div></div>
@@ -742,6 +746,10 @@
           <h3>🔐 Segurança por hierarquia de papéis</h3>
           <p>Como o acesso é sempre o menor necessário para a função de cada pessoa, a operação reduz o risco de alterações indevidas em cadastros críticos ou no histórico de atendimentos.</p>
         </div>
+        <div class="card">
+          <h3>🤖 Triagem automática no primeiro contato</h3>
+          <p>Assim que um contato novo chega numa linha em modo API, o sistema envia — além da confirmação de protocolo — um menu de assunto nativo do WhatsApp (lista com opções fixas: equipamento, insumos, volume de testes ou outro assunto). A escolha do cliente já entra classificada no protocolo, sem precisar de nenhuma ferramenta externa de chatbot.</p>
+        </div>
       </div>
     </section>
 
@@ -781,6 +789,10 @@
         <div class="faq-item">
           <div class="faq-q"><span>Este manual reflete permissões em tempo real?</span><span class="chev">▾</span></div>
           <div class="faq-a"><p>Ele descreve o comportamento padrão da versão atual da aplicação. As permissões efetivas de cada conta são sempre controladas pelo sistema e pelo banco de dados — este documento é um guia de apoio, não a fonte de verdade sobre acesso.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>O que é o menu de triagem que o cliente recebe no WhatsApp?</span><span class="chev">▾</span></div>
+          <div class="faq-a"><p>É uma lista nativa do WhatsApp (recurso oficial da própria Cloud API da Meta, sem depender de nenhuma ferramenta externa) enviada logo após a confirmação automática de um protocolo novo. O cliente escolhe entre opções fixas — equipamento com problema, consumíveis/insumos, volume de testes ou outro assunto — e essa escolha já fica registrada como a <b>categoria</b> do protocolo, visível na lista de atendimentos, sem que o técnico precise perguntar de novo. Atendimentos reabertos (o cliente volta dentro de 15 dias sobre o mesmo equipamento) não recebem o menu de novo, já que o contexto já é conhecido.</p></div>
         </div>
       </div>
     </section>
@@ -893,6 +905,7 @@
       msgCliente: el('msg-cliente'),
       digitando: el('digitando-tecnico'),
       msgTecnico: el('msg-tecnico'),
+      msgTriagem: el('msg-triagem'),
       seta1: el('seta1'),
       ticket: el('ticket'),
       seta2: el('seta2'),
@@ -923,6 +936,14 @@
         apply(){
           els.seta1.style.opacity = '.5';
           els.ticket.classList.add('show');
+        }
+      },
+      {
+        title: 'O Sistema envia um menu de triagem',
+        desc: 'Uma lista nativa do WhatsApp pede ao cliente para classificar o assunto — sem depender de digitar certo.',
+        duration: 3400,
+        apply(){
+          els.msgTriagem.classList.add('show');
         }
       },
       {
